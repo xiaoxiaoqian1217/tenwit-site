@@ -1,5 +1,6 @@
 <template>
   <div>
+      <MenuOutlined @click="() =>visible = !visible"  />
     <Drawer
       title="Basic Drawer"
       placement="right"
@@ -15,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import { Drawer } from 'ant-design-vue'
 const visible = ref<boolean>(false);
 
 const afterVisibleChange = (bool: boolean) => {

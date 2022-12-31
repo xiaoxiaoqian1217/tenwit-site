@@ -4,7 +4,7 @@
       <nav class="relative z-50 flex justify-between">
         <div class="flex items-center md:gap-x-12">
           <NuxtLink to="#" aria-label="Home">
-            <!-- <Logo class="h-10 w-auto" /> -->
+            <Logo class="h-10 w-auto" />
           </NuxtLink>
           <div class="hidden md:flex md:gap-x-6">
             <NuxtLink to="#features">Features</NuxtLink>
@@ -22,7 +22,7 @@
             </span>
           </Button>
           <div class="-mr-1 md:hidden">
-            <!-- <MobileNavigation /> -->
+            <MobileNavigation />
           </div>
         </div>
       </nav>
