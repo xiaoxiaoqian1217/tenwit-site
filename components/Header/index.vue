@@ -7,9 +7,20 @@
             <Logo class="h-10 w-auto" />
           </NuxtLink>
           <div class="hidden md:flex md:gap-x-6">
-            <NuxtLink to="#features">Features</NuxtLink>
+            <!-- <NuxtLink :to="navigation.href" :target="navigation.target"
+              >{{ navigation.label }}
+            </NuxtLink> -->
+            <div
+              v-for="navigation in siteHeader.navigations.data"
+              :key="navigation.href"
+            >
+              <NuxtLink :to="navigation.href" :target="navigation.target"
+                >{{ navigation.label }}
+              </NuxtLink>
+            </div>
+            <!-- <NuxtLink to="/">首页</NuxtLink>
             <NuxtLink to="#testimonials">Testimonials</NuxtLink>
-            <NuxtLink to="#pricing">Pricing</NuxtLink>
+            <NuxtLink to="#pricing">Pricing</NuxtLink> -->
           </div>
         </div>
         <div class="flex items-center gap-x-5 md:gap-x-8">
@@ -35,6 +46,9 @@ import Container from "../Container";
 import Button from "../Button";
 import Logo from "../Logo";
 import MobileNavigation from "./MobileNavigation";
+const props = defineProps({
+  siteHeader: Array[Object],
+});
 </script>
 
 <style scoped></style>

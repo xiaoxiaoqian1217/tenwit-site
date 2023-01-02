@@ -11,6 +11,7 @@
   "devDependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "@nuxtjs/apollo": "^5.0.0-alpha.5",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/strapi": "^1.6.3",
     "ant-design-vue": "^3.2.15",
     "graphql": "^16.6.0",

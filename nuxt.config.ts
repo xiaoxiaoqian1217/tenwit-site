@@ -1,6 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
+const env = require("dotenv").config();
+console.log(
+  "%c [ env ]-5",
+  "font-size:13px; background:pink; color:#bf2c9f;",
+  env
+);
+
 export default defineNuxtConfig({
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
@@ -47,8 +54,9 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.BACKEND_URL || "http://127.0.0.1:1337/graphql",
+        httpEndpoint:
+          process.env.BACKEND_URL || "http://127.0.0.1:1337/graphql",
       },
     },
   },
-})
+});
