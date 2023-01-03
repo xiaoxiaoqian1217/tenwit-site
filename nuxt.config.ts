@@ -6,13 +6,18 @@ const env = require("dotenv").config();
 const routerBase =
   process.env.DEPLOY_ENV === "GH_PAGES"
     ? {
-        router: {
-          base: "/tenwit-site/",
+        app: {
+          baseURL: "/tenwit-site/",
         },
       }
     : {};
 export default defineNuxtConfig({
   ...routerBase,
+  nitro: {
+    prerender: {
+      routes: ["/", "/customer-case", "/solution/customer"],
+    },
+  },
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
     plugins: [
