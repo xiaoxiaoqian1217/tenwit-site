@@ -2,11 +2,6 @@
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 const env = require("dotenv").config();
-console.log(
-  "%c [ env ]-5",
-  "font-size:13px; background:pink; color:#bf2c9f;",
-  env
-);
 
 export default defineNuxtConfig({
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
