@@ -16,7 +16,6 @@ import Header from "@/components/Header/index.vue";
 import { twGlobalQurey } from "../graphql/twGlobal";
 import { getSlugSeoQuery } from "../graphql/slugSeo";
 import { Card, CardMeta } from "ant-design-vue";
-impoer;
 const {
   public: { strapiURL },
 } = useRuntimeConfig();
