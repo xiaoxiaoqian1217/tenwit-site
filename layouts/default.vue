@@ -22,7 +22,8 @@ const {
 } = useRuntimeConfig();
 const { data: globalData } = await useAsyncQuery(twGlobalQurey);
 const route = useRoute();
-const slug = route.params.slug;
+const slug = route.name;
+
 const data = removeAttrsAndId(removeTime(unref(globalData)));
 const {
   twGlobal: {
@@ -31,32 +32,9 @@ const {
 } = data;
 // 获取SEO数据
 const { data: SeoData } = await useAsyncQuery(getSlugSeoQuery, {
-  slug: slug ? slug : "home",
+  slug: slug || "index",
 });
 const { Seo } = removeAttrsAndId(removeTime(unref(SeoData)))?.pages.data[0];
-
-console.log(
-  "%c [ SeoData ]-28",
-  "font-size:13px; background:pink; color:#bf2c9f;",
-  Seo,
-  SeoData
-);
-
-// const {
-//   global: {
-//     data: {
-//       attributes: { siteHeader, footer, icpNumber },
-//     },
-//   },
-// } = unRefGlobalData;
-
-// console.log(
-//   "%c [ footer ]-22",
-//   "font-size:13px; background:pink; color:#bf2c9f;",
-//   siteHeader,
-//   footer,
-//   icpNumber
-// );
 </script>
 
 <style scoped></style>
