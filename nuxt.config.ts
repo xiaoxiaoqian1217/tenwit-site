@@ -2,8 +2,16 @@
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 const env = require("dotenv").config();
-
+const routerBase =
+  process.env.DEPLOY_ENV === "GH_PAGES"
+    ? {
+        router: {
+          base: "/<repository-name>/",
+        },
+      }
+    : {};
 export default defineNuxtConfig({
+  ...routerBase,
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
     plugins: [

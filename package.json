@@ -6,7 +6,9 @@
     "prod": "nuxt dev --mode production",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
+    "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "^6.1.0",
