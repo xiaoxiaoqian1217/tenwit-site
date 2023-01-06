@@ -87,11 +87,17 @@
 import { casePageData } from "../graphql/casePage";
 import { Card, CardMeta } from "ant-design-vue";
 import { removeAttrsAndId, removeTime } from "@/utils";
+import { getSlugSeoQuery } from "../graphql/slugSeo";
 
 const {
   public: { strapiURL },
 } = useRuntimeConfig();
 const { data } = await useAsyncQuery(casePageData);
+console.log(
+  "%c [ data ]-95",
+  "font-size:13px; background:pink; color:#bf2c9f;",
+  data
+);
 
 const unRefPageData = unref(data);
 const {
@@ -101,7 +107,43 @@ const {
     },
   },
 } = unRefPageData;
-const [, caseDetail, partner] = blocks;
+// const [, caseDetail, partner] = blocks;
+const caseDetail = blocks[1];
+const partner = blocks[2];
+const route = useRoute();
+const slug = route.name;
+
+const { data: SeoData } = await useAsyncQuery(getSlugSeoQuery, {
+  slug: slug || "index",
+});
+console.log(
+  "%c [ SeoData ]-37",
+  "font-size:13px; background:pink; color:#bf2c9f;",
+  SeoData.value
+);
+const SS = removeAttrsAndId(removeTime(SeoData.value || {}))?.pages?.data[0];
+const Seo = SS?.SEO || {};
+
+console.log(
+  "%c [ SeoData.value ]-49",
+  "font-size:13px; background:pink; color:#bf2c9f;",
+  SeoData.value?.pages?.data[0]?.attributes?.Seo?.metaTitle,
+  SeoData.value?.pages?.data[0]?.attributes?.Seo?.metaDescription
+);
+useHead({
+  title: SeoData?.value?.pages?.data[0]?.attributes?.Seo?.metaTitle || "",
+
+  meta: [
+    {
+      name: "description",
+      content:
+        SeoData?.value?.pages?.data[0]?.attributes.Seo?.metaDescription || "",
+    },
+  ],
+  bodyAttrs: {
+    class: "test",
+  },
+});
 </script>
 
 <style scoped>

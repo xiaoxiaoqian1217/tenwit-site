@@ -3,13 +3,10 @@
     <Container>
       <nav class="relative z-50 flex justify-between">
         <div class="flex items-center md:gap-x-12">
-          <NuxtLink to="#" aria-label="Home">
+          <NuxtLink to="/" aria-label="Home">
             <Logo class="h-10 w-auto" />
           </NuxtLink>
           <div class="hidden md:flex md:gap-x-6">
-            <!-- <NuxtLink :to="navigation.href" :target="navigation.target"
-              >{{ navigation.label }}
-            </NuxtLink> -->
             <div
               v-for="navigation in siteHeader.navigations.data"
               :key="navigation.href"
@@ -19,8 +16,9 @@
               </NuxtLink>
             </div>
             <!-- <NuxtLink to="/">首页</NuxtLink>
-            <NuxtLink to="#testimonials">Testimonials</NuxtLink>
-            <NuxtLink to="#pricing">Pricing</NuxtLink> -->
+            <NuxtLink to="/customer-case">Testimonials</NuxtLink>
+            <NuxtLink to="/solutio/customer">Pricing</NuxtLink>
+            -->
           </div>
         </div>
         <div class="flex items-center gap-x-5 md:gap-x-8">
@@ -46,6 +44,8 @@ import Container from "../Container";
 import Button from "../Button";
 import Logo from "../Logo";
 import MobileNavigation from "./MobileNavigation";
+import { defineProps } from "#imports";
+
 const props = defineProps({
   siteHeader: Array[Object],
 });

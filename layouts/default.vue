@@ -1,11 +1,14 @@
 <template>
   <div>
     <!-- 动态获取SEO数据 -->
-    <Head>
-      <Title>{{ Seo.metaTitle }}</Title>
-      <Meta name="description" :content="Seo.metaDescription" />
-      <Meta name="keywords" :content="Seo.keywords" />
-    </Head>
+    <!-- <Head>
+      <Title>{{ Seo?.metaTitle }}</Title>
+      <Meta name="description" :content="Seo?.metaDescription" />
+      <Meta name="keywords" :content="Seo?.keywords" />
+    </Head> -->
+    <!-- <NuxtLink to="/">首页</NuxtLink>
+    <NuxtLink to="/customer-case">Testimonials</NuxtLink>
+    <NuxtLink to="/solutio/customer">Pricing</NuxtLink> -->
     <Header :siteHeader="siteHeader"></Header>
     <slot />
   </div>
@@ -33,7 +36,23 @@ const {
 const { data: SeoData } = await useAsyncQuery(getSlugSeoQuery, {
   slug: slug || "index",
 });
-const { Seo } = removeAttrsAndId(removeTime(unref(SeoData)))?.pages.data[0];
+
+const SS = removeAttrsAndId(removeTime(SeoData.value || {}))?.pages?.data[0];
+const Seo = SS?.SEO || {};
+
+useHead({
+  title: Seo?.metaTitle || "",
+
+  meta: [
+    {
+      name: "description",
+      content: Seo?.metaDescription || "",
+    },
+  ],
+  bodyAttrs: {
+    class: "test",
+  },
+});
 </script>
 
 <style scoped></style>

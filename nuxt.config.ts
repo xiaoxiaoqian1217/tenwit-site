@@ -13,11 +13,11 @@ const routerBase =
     : {};
 export default defineNuxtConfig({
   ...routerBase,
-  nitro: {
-    prerender: {
-      routes: ["/", "/customer-case", "/solution/customer"],
-    },
-  },
+  // nitro: {
+  //   prerender: {
+  //     routes: ["/", "/customer-case", "/solution/customer"],
+  //   },
+  // },
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
     plugins: [
@@ -30,13 +30,7 @@ export default defineNuxtConfig({
         ],
       }),
     ],
-    ssr: {
-      noExternal: [
-        "compute-scroll-into-view",
-        "ant-design-vue",
-        "@ant-design/icons-vue",
-      ],
-    },
+
     css: {
       preprocessorOptions: {
         less: {
@@ -46,26 +40,27 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: [
-    // windi preflight
-    "virtual:windi-base.css",
-    // your stylesheets which overrides the preflight
-    "~/assets/global.less",
-    // windi extras
-    "virtual:windi-components.css",
-    "virtual:windi-utilities.css",
-  ],
-  runtimeConfig: {
-    public: {
-      strapiURL: process.env.STRAPI_URL,
-    },
-  },
+
   apollo: {
     clients: {
       default: {
         httpEndpoint:
           process.env.BACKEND_URL || "http://127.0.0.1:1337/graphql",
       },
+    },
+  },
+  css: [
+    // windi preflight
+    // "virtual:windi-base.css",
+    // your stylesheets which overrides the preflight
+    "~/assets/global.less",
+    // windi extras
+    // "virtual:windi-components.css",
+    // "virtual:windi-utilities.css",
+  ],
+  runtimeConfig: {
+    public: {
+      strapiURL: process.env.STRAPI_URL,
     },
   },
 });
