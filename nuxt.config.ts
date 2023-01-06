@@ -13,11 +13,6 @@ const routerBase =
     : {};
 export default defineNuxtConfig({
   ...routerBase,
-  // nitro: {
-  //   prerender: {
-  //     routes: ["/", "/customer-case", "/solution/customer"],
-  //   },
-  // },
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
     plugins: [
