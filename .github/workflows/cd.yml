@@ -1,30 +1,34 @@
-name: cd
+name: Github Pages
 
-on: [push, pull_request]
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  cd:
-    runs-on: ${{ matrix.os }}
+  # This workflow contains a single job called "publish"
+  publish:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [14]
-
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-      - name: Setup node env
-        uses: actions/setup-node@v2.1.2
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Generate
-        run: yarn generate:gh-pages
+          node-version: "16"
+      - run: npm ci
+      - run: npm run generate
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
