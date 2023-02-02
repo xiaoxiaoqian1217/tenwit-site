@@ -1,0 +1,65 @@
+name: deploy-tencent
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "publish"
+  publish:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm ci
+      - run: npm run generate
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: production-files
+          path: ./.output/public
+  # 部署到腾讯云
+  deploy:
+    name: Deploy
+    needs: publish
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: production-files
+          path: ./.output/public
+      - name: Deploy to Tencent Cloud
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          # 私钥
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # scp参数
+          ARGS: "-avzr --delete"
+          # 源目录，编译后生成的文件目录
+          SOURCE: "./.output/public"
+          # 服务器ip：换成你的服务器IP
+          REMOTE_HOST: "114.132.124.210"
+          # 用户
+          REMOTE_USER: "root"
+          # 目标地址 你在服务器上部署代码的地方
+          TARGET: "/root/www"

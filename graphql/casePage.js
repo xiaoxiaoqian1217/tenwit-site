@@ -21,6 +21,14 @@ query  {
                        }
                      }
                    }
+                  webP{
+                    data{
+                      attributes{
+                        url
+                      }
+                    }
+                  }
+                 
                  }
                }
                
@@ -39,6 +47,7 @@ query  {
                   }
                 }
               }
+          
             }
            
           }
@@ -53,6 +62,14 @@ query  {
                           url
                         }
   
+                      }
+                    }
+                    webP{
+                      data{
+                        attributes{
+                          url
+         
+                        }
                       }
                     }
                   }

@@ -15,13 +15,18 @@ import Header from "@/components/Header/index.vue";
 import { twGlobalQurey } from "../graphql/twGlobal";
 import { getSlugSeoQuery } from "../graphql/slugSeo";
 import { Card, CardMeta } from "ant-design-vue";
+import { onMounted, reactive } from "vue";
+
 const {
   public: { strapiURL },
 } = useRuntimeConfig();
 const { data: globalData } = await useAsyncQuery(twGlobalQurey);
 const route = useRoute();
 const slug = route.name;
-
+const { $sendTracker } = useNuxtApp();
+onMounted(() => {
+  $sendTracker({ data: 1 });
+});
 const data = removeAttrsAndId(removeTime(unref(globalData)));
 const {
   twGlobal: {
@@ -43,6 +48,10 @@ useHead({
     {
       name: "description",
       content: Seo?.metaDescription || "",
+    },
+    {
+      name: "google-site-verification",
+      content: "mi260azTbYkG4bYWtOljAiuXpJjFQ9NMP3LBu_zISsw",
     },
   ],
   bodyAttrs: {

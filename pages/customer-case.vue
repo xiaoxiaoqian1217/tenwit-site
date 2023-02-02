@@ -3,7 +3,7 @@
     <!-- 客户案例 -->
     <div class="case-wrap relative">
       <div class="case-item">
-        <img
+        <!-- <img
           class="case-poster object-center"
           :src="`${
             strapiURL +
@@ -11,7 +11,25 @@
               .image.data.attributes.url
           }`"
           alt="..."
-        />
+        /> -->
+        <picture>
+          <source
+            type="image/webp"
+            :srcset="`${
+              strapiURL +
+              data.page.data.attributes.blocks[0].graphic_intro.data.attributes
+                .webP.data?.attributes?.url
+            }`"
+          />
+          <img
+            :src="`${
+              strapiURL +
+              data.page.data.attributes.blocks[0].graphic_intro.data.attributes
+                .image.data.attributes.url
+            }`"
+            alt="regular pyramid built from four equilateral triangles"
+          />
+        </picture>
       </div>
 
       <div class="case-intros pt-24 absolute top-0 left-0 lg:pl-24 md:pl-16">
@@ -40,14 +58,32 @@
         <template v-for="card in caseDetail.cards" :key="card.text">
           <Card class="card-item" hoverable style="width: 300px">
             <template #cover>
-              <img
+              <!-- <img
                 alt="example"
                 :src="`${
                   strapiURL +
                   data.page.data.attributes.blocks[0].graphic_intro.data
                     .attributes.image.data.attributes.url
                 }`"
-              />
+              /> -->
+              <picture>
+                <source
+                  type="image/webp"
+                  :srcset="`${
+                    strapiURL +
+                    data.page.data.attributes.blocks[0].graphic_intro.data
+                      .attributes.webP.data?.attributes?.url
+                  }`"
+                />
+                <img
+                  :src="`${
+                    strapiURL +
+                    data.page.data.attributes.blocks[0].graphic_intro.data
+                      .attributes.image.data.attributes.url
+                  }`"
+                  alt="regular pyramid built from four equilateral triangles"
+                />
+              </picture>
             </template>
             <CardMeta title="Europe Street beat">
               <template #description>{{ card.text }}</template>
@@ -62,7 +98,7 @@
         class="lmt-2 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
       >
         {{ partner.title }}
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 p-24">
+        <!-- <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 p-24">
           <template
             v-for="graphic_intro in partner.graphic_intros.data"
             :key="graphic_intro.id"
@@ -77,7 +113,7 @@
               />
             </div>
           </template>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
