@@ -3,16 +3,8 @@ import { defineNuxtConfig } from "nuxt/config";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 const env = require("dotenv").config();
-const routerBase =
-  process.env.DEPLOY_ENV === "GH_PAGES"
-    ? {
-        app: {
-          baseURL: "/tenwit-site/",
-        },
-      }
-    : {};
+
 export default defineNuxtConfig({
-  ...routerBase,
   modules: ["nuxt-windicss", "@nuxtjs/apollo"],
   vite: {
     plugins: [
@@ -39,8 +31,14 @@ export default defineNuxtConfig({
     clients: {
       default: {
         httpEndpoint:
-          process.env.BACKEND_URL || "http://127.0.0.1:1337/graphql",
+          "http://danyanpi.site:1337/graphql" ||
+          "http://127.0.0.1:1337/graphql",
       },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      strapiURL: "http://danyanpi.site:1337" || "http://127.0.0.1:1337",
     },
   },
   css: [
@@ -52,9 +50,4 @@ export default defineNuxtConfig({
     // "virtual:windi-components.css",
     // "virtual:windi-utilities.css",
   ],
-  runtimeConfig: {
-    public: {
-      strapiURL: process.env.STRAPI_URL,
-    },
-  },
 });
